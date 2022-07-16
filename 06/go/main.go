@@ -70,6 +70,7 @@ func main() {
 					a = a | addr
 				} else {
 					a = a | currentNotLSymbolCount
+					symbolTable.AddEntry(parser.Symbol(), currentNotLSymbolCount)
 					currentNotLSymbolCount++
 				}
 
@@ -172,7 +173,7 @@ func (p *Parser) Dest() string {
 	if len(tmp) == 1{
 		return ""
 	}
-	return tmp[0]
+	return strings.TrimSpace(tmp[0])
 }
 
 func (p *Parser) Comp() string {
@@ -238,12 +239,14 @@ var COMP = map[string]int{
 
 func Dest(str string) int {
 	ret := 0b000000
-	switch(str) {
-	case "A":
+
+	if strings.Contains(str, "A") {
 		ret = ret | 0b100000
-	case "M":
+	}
+	if strings.Contains(str, "M") {
 		ret = ret | 0b001000
-	case "D":
+	}
+	if strings.Contains(str, "D") {
 		ret = ret | 0b010000
 	}
 	return ret
