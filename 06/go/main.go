@@ -70,6 +70,7 @@ func main() {
 					a = a | addr
 				} else {
 					a = a | currentNotLSymbolCount
+					symbolTable.AddEntry(parser.Symbol(), currentNotLSymbolCount)
 					currentNotLSymbolCount++
 				}
 
