@@ -27,14 +27,13 @@ func MakeCodeWriter() *CodeWriter {
 }
 
 func (c *CodeWriter) SetFileName(name string) {
-	// TODO fix me. trim filename
-	c.fileName = "temp"
 	binFileName := strings.Replace(name, "vm", "asm", 1)
 	binFile, err := os.Create(binFileName)
 	if err != nil {
 		panic("cannot create file ")
 	}
 	c.file = binFile
+	c.fileName = strings.Replace(c.file.Name(), ".asm", "", 1)
 }
 
 func (c *CodeWriter) WriteInit() {
